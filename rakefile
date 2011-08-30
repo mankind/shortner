@@ -1,0 +1,22 @@
+require 'rubygems'
+require 'sinatra'
+require 'rake'
+require 'rake/testtask'
+require 'mongoid'
+require 'yaml'
+
+
+#load yaml
+desc "Load the yaml"
+task :load_mongoid do
+  ENV['RACK_ENV'] = 'test' || 'development' || 'production'
+  Mongoid.load!("./config/mongoid.yml")
+end
+
+task :default => :test
+Rake::TestTask.new do |t|
+  ENV['RACK_ENV'] = 'test'
+  t.libs << "test"
+  t.test_files = FileList['test/*_test.rb']
+  t.verbose = true
+end
