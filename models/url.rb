@@ -19,7 +19,8 @@ class Url
   def self.find_by_shortened(shortened)
     find(shortened.alphadecimal)
   end
-  
+
+
   def self.find_by_url(url)
     find(:first, :conditions => {:url => "url"})
   end
@@ -28,5 +29,5 @@ class Url
     existing_url = find_by_url(url)
     existing_url ||= self.create(:url => url)
   end
-  
+
 end

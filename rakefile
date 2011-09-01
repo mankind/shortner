@@ -3,14 +3,16 @@ require 'sinatra'
 require 'rake'
 require 'rake/testtask'
 require 'mongoid'
-require 'yaml'
-
 
 #load yaml
 desc "Load the yaml"
 task :load_mongoid do
   ENV['RACK_ENV'] = 'test' || 'development' || 'production'
-  Mongoid.load!("./config/mongoid.yml")
+  
+ Mongoid.configure do |config|
+  config.master = Mongo::Connection.new.db("shortner")
+ end
+ 
 end
 
 task :default => :test

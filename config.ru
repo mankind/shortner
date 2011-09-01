@@ -5,5 +5,5 @@ $LOAD_PATH << File.dirname(__FILE__)
 require 'rubygems'
 require 'sinatra' 
 require 'shortner'
-require './test
+
 run Shortner
